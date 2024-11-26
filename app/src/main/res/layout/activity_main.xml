@@ -1,0 +1,56 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/main"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:padding="8dp"
+    tools:context=".MainActivity">
+
+   <androidx.constraintlayout.widget.ConstraintLayout
+       android:layout_width="match_parent"
+       android:layout_height="match_parent">
+
+       <LinearLayout
+           android:id="@+id/linearLayoutEditText"
+           android:layout_width="match_parent"
+           android:layout_height="wrap_content"
+           app:layout_constraintTop_toTopOf="parent"
+           app:layout_constraintStart_toStartOf="parent"
+           android:orientation="vertical">
+
+           <EditText
+               android:id="@+id/etProvinsi"
+               android:layout_width="match_parent"
+               android:layout_height="wrap_content"
+               android:hint="Masukkan nama provinsi"/>
+
+           <EditText
+               android:id="@+id/etIbukota"
+               android:layout_width="match_parent"
+               android:layout_height="wrap_content"
+               android:hint="Masukkan nama ibukota"/>
+
+       </LinearLayout>
+
+       <Button
+           android:id="@+id/btSimpan"
+           android:layout_width="match_parent"
+           android:layout_height="wrap_content"
+           app:layout_constraintTop_toBottomOf="@id/linearLayoutEditText"
+           app:layout_constraintStart_toStartOf="parent"
+           android:text="Simpan Data"
+           android:backgroundTint="#00A040"/>
+
+       <ListView
+           android:id="@+id/lvData"
+           android:layout_width="match_parent"
+           android:layout_height="wrap_content"
+           app:layout_constraintTop_toBottomOf="@id/btSimpan"
+           app:layout_constraintStart_toStartOf="parent"/>
+
+   </androidx.constraintlayout.widget.ConstraintLayout>
+
+</LinearLayout>
