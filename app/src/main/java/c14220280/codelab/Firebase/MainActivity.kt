@@ -6,6 +6,7 @@ import android.widget.ArrayAdapter
 import android.widget.Button
 import android.widget.EditText
 import android.widget.ListView
+import android.widget.SimpleAdapter
 import androidx.activity.enableEdgeToEdge
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.view.ViewCompat
@@ -19,7 +20,9 @@ lateinit var _etIbukota: EditText
 
 var DataProvinsi = ArrayList<daftarProvinsi>()
 
-lateinit var lvAdapter : ArrayAdapter<daftarProvinsi>
+var data: MutableList<Map<String, String>> = ArrayList()
+
+lateinit var lvAdapter : SimpleAdapter
 
 class MainActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -39,7 +42,13 @@ class MainActivity : AppCompatActivity() {
         val _btSimpan = findViewById<Button>(R.id.btSimpan)
         val _lvData = findViewById<ListView>(R.id.lvData)
 
-        lvAdapter = ArrayAdapter(this, android.R.layout.simple_list_item_1, DataProvinsi)
+        lvAdapter = SimpleAdapter(
+            this,
+            data,
+            android.R.layout.simple_list_item_2,
+            arrayOf<String>("Pro", "Ibu"),
+            intArrayOf(android.R.id.text1, android.R.id.text2)
+        )
         _lvData.adapter = lvAdapter
 
         fun TambahData(db: FirebaseFirestore, Provinsi: String, Ibukota: String) {
@@ -77,6 +86,13 @@ class MainActivity : AppCompatActivity() {
                 .addOnFailureListener {
                     Log.d("firebase", it.message.toString())
                 }
+            data.clear()
+            DataProvinsi.forEach {
+                val dt: MutableMap<String, String> = HashMap(2)
+                dt["Pro"] = it.provinsi
+                dt["Ibu"] = it.ibukota
+                data.add(dt)
+            }
         }
 
     }
